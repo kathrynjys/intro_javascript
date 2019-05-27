@@ -9,7 +9,7 @@ var displayVolunteers = function () {
 	// comment out the line above change this to a loop instead to loop through the array.
 	for(var i=0; i<volunteerArray.length; i++){
       
-     $("volunteerList").value =  i+1 + "." + volunteerArray.join ("\n");
+     $("volunteerList").value =  (i+1) + "." + volunteerArray.join ("\n");
         
     }
 	
