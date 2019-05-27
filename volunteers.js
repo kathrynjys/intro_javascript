@@ -3,16 +3,15 @@ var $ = function (id) { return document.getElementById(id); };
 var volunteerArray = [];
 
 var displayVolunteers = function () {   
-    // display the volunteers in the text area
-   // $("volunteerList").value = volunteerArray.join("\n");
-
-	// comment out the line above change this to a loop instead to loop through the array.
+  // display the volunteers in the text area
+    //$("volunteerList").value = volunteerArray.join("\n");
+     var retval = 0;
+    //loop through the volunteer array using for loop 
 	for(var i=0; i<volunteerArray.length; i++){
-      
-     $("volunteerList").value =  (i+1) + "." + volunteerArray.join ("\n");
-        
+    document.getElementById("volunteerList").value = (i+1) + "." + volunteerArray.join ("\n");
+        return retval;
+        console.log(i+1,volunteerArray[i]);
     }
-	
 };
 
 var addVolunteer = function () {
