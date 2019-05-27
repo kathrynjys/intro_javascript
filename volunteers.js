@@ -5,12 +5,9 @@ var volunteerArray = [];
 var displayVolunteers = function () {   
   // display the volunteers in the text area
     //$("volunteerList").value = volunteerArray.join("\n");
-     var retval = 0;
     //loop through the volunteer array using for loop 
 	for(var i=0; i<volunteerArray.length; i++){
-    document.getElementById("volunteerList").value = (i+1) + "." + volunteerArray.join ("\n");
-        return retval;
-        console.log(i+1,volunteerArray[i]);
+    $("volunteerList").value = (i+1) + "." + volunteerArray.join ("\n");
     }
 };
 
