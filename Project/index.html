@@ -48,7 +48,19 @@
         document.getElementById("adBanner").src = adImages[theBanner]; 
         setTimeout(rotate, 3000); //change image every 3 seconds
     }
-    
+	
+    function preloader() { 
+    if (document.images){
+        var img1 = new Image(); 
+        var img2 = new Image(); 
+        var img3 = new Image(); 
+        
+        img1.src = "images/banner1.jpg"; 
+        img2.src = "images/banner2.jpg"; 
+        img3.src = "images/banner3.jpg";
+    }
+    }
+  
     </script>
 
     <footer>This events site is for IT3515 tasks.
