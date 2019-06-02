@@ -29,11 +29,27 @@
     </header>
     <section id="bannerImages">
 	Banner Images<br/>
-<img src="images/banner1.jpg" alt="Banner"/>
-<img src="images/banner2.jpg" alt="Banner"/>
-<img src="images/banner3.jpg" alt="Banner"/>
+       <img src="images/banner1.jpg" id = "adBanner" alt="Banner"/>
+       
     </section>
-
+<script> 
+    window.onload = rotate; 
+    
+    var theBanner = 0; 
+    //array of images
+    var adImages = new Array("images/banner1.jpg", "images/banner2.jpg", "images/banner3.jpg"); 
+    
+    //rotate function 
+    function rotate() {
+        theBanner++; //take the value and add one to it
+        if(theBanner == adImages.length){ //set back to 0 
+            theBanner= 0; 
+        }
+        document.getElementById("adBanner").src = adImages[theBanner]; 
+        setTimeout(rotate, 3000); //change image every 3 seconds
+    }
+    
+    </script>
 
     <footer>This events site is for IT3515 tasks.
     </footer>
