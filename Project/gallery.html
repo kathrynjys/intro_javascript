@@ -4,6 +4,13 @@
 <head>
     <title>Invitation Page</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    
+    <link rel="preload" href="images/event.jpg" as="script" media="(max-width: 600px)">
+    <link rel="preload" href="images/firefighter.jpg" as="script" media="(max-width: 600px)">
+    <link rel="preload" href="images/silhouette.jpg" as="script" media="(max-width: 600px)">
+    <link rel="preload" href="images/work.jpg" as="script" media="(max-width: 600px)"> 
+    
+    <script src="js/gallery.js">  </script>
 </head>
 
 <body>
@@ -58,7 +65,52 @@
 </div>
 
     </section>
+<script> 
+    
+    
+    function preloader() { 
+    if (document.images){
+        var img1 = new Image(); 
+        var img2 = new Image(); 
+        var img3 = new Image(); 
+        var img4 = new Image(); 
+        var img5 = new Image(); 
+        var img6 = new Image(); 
+        var img7 = new Image(); 
+        var img8 = new Image(); 
+        
+        img1.src = "images/firefighter.jpg"; 
+        img2.src = "images/work.jpg"; 
+        img3.src = "images/silhouette.jpg"; 
+        img4.src = "images/event.jpg"; 
+        img5.src = "images/firefighter2.jpg"; 
+        img6.src = "images/work2.jpg";
+        img7.src = "images/silhouette2.jpg";
+        img8.src = "images/event2.jpg"; 
+        
+    }
+    }
+    
+    function setupRollover(theImage){
+        theImage.outImage = newImage(); //adding an image object to an image
+        theImage.outImage.src=theImage.src;//default image
+        theImage.onmouseout=funtion(){ 
+        this.src=this.outImage.src; //mouse away from img
+        }
+    }
+    
+    theImage.overImage=newImage(); //new image object with overimage
+    theImage.overImage.src="image/" + theImage.id +"_on.gif"; //source file on the fly
+    theImage.onmouseover = function (){ //reset to the current source image
+        this.src=this.overImage.src; 
+    }
+    
+    Image myImage = document.images.namedItem("capellaimage"); 
+    Image myImage2 = document.images.namedItem("capellaimage2");
+    setupRollover(myImage);
+    setupRollover(myImage2);
 
+    </script>
 
 
     <footer>This events site is for IT3515 tasks.
