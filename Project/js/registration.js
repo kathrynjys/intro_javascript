@@ -1,73 +1,190 @@
-window.onload = init;
-function checkall() {
-    var checkev = 0;
-    var usrname = document.pageForm.uname.value; 
-    var psword = document.pageForm.pword.value; 
-    var psvword = document.pageForm.pvword.value; 
-    var ftname = document.pageForm.pvword.value; 
-    var ltname = document.pageForm.lname.value; 
-    var eltml = document.pgForm.emid.value; 
-    var atrate = eltml.indexOf("@");
-    var dot = eltml.lastIndexOf(".");
-    var punumb = document.pageForm.pnum.value; 
+function checkall(){ 
  
-    if (usrname == ""){
-        document.getElementById('uname').innerHTML = "must only contain letters and numbers.";
-        checkev = 0; 
-        }else {
-          document.getElementById('uname').innerHTML = "";
-          checkev++;
-        }
-    if (psword ==""){
-        document.getElementById('pword').innerHTML = "minimum of 8 characters"; 
-        checkev = 0; 
-        } else { 
-        document.getElementById('pword').innerHTML = ""; 
-        checkev++; 
-        }
-    if (psvword ==""){
-        document.getElementById('pvword').innerHTML = "minimum of 8 characters, must match password"; 
-        checkev = 0; 
-        }else {
-            document.getElementById('pvword').innerHTML = ""; 
-            checkev++; 
-        }
-    if (ftname == "") {
-          document.getElementById('fname').innerHTML = "Your first name is required.";
-          checkev = 0;
-        } else {
-          document.getElementById('fname').innerHTML = "";
-          checkev++;
-        }
-    if (ltname == "") {
-          document.getElementById('lname').innerHTML = "Your last name is required.";
-          checkev = 0;
-        } else {
-          document.getElementById('lname').innerHTML = "";
-          checkev++;
-        }
-    if (eltml ==""){
-        document.getElementById('emid').innerHTML = "use xxx@xxx.xxx format";  
-        checkev = 0; 
-        } else if (atrate < 1 || dot < atrate + 2 || dot + 2 >= eltml.length)
-          document.getElementById('emid').innerHTML = "Your email input is not valid.";
-    else {
-        document.getElementById('emid').innerHTML = "";
-        checkev++; 
-        }
     
-    if (punumb == "") {
-        document.getElementById('pnum').innerHTML = "use (xxx) xxx-xxxx format"; 
-        checkev = 0; 
-    } else {
-        document.getElementById('pnum').innerHTML = "";
-        checkev++; 
+//Declare variables
+    var userName,
+        password,
+        passwordVerify,
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+    //variables used to notify fields with errors
+        userNameError = false,          
+        passwordError = false,
+        passwordVerifyError = false,
+        firstNameError = false,
+        lastNameError = false,
+        emailError = false,
+        phoneNumberError = false;
+    
+     
+    //Fill varibles 
+    userName = document.getElementById('userName').value;
+    password = document.getElementById('password').value;
+    passwordVerify = document.getElementById('passwordVerify').value;
+    firstName = document.getElementById('firstName').value;
+    lastName = document.getElementById('lastName').value;
+    email = document.getElementById('email').value;
+    phoneNumber = document.getElementById('phoneNumber').value;
+
+//Clear all warning labels 
+    document.getElementById("userNameWarning").innerHTML = "";
+    document.getElementById("passwordWarning").innerHTML = "";
+    document.getElementById("passwordVerifyWarning").innerHTML = "";
+    document.getElementById("firstNameWarning").innerHTML = "";
+    document.getElementById("hostNameWarning").innerHTML = "";
+    document.getElementById("emailWarning").innerHTML = "";
+    document.getElementById("phoneNumberWarning").innerHTML = "";
+    
+    //Data verification logic
+
+    //UserName verification
+    var lettersNumbers = /^[0-9a-zA-Z]+$/;
+    var letters = /^[A-Za-z]+$/;
+    var emailValues = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var phoneValues = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+    if (userName === "") {
+        document.getElementById("userNameWarning").innerHTML = " *Please provide a username!";
+        userNameError = true;
+    } else if (!userName.match(lettersNumbers)) {
+        document.getElementById("userNameWarning").innerHTML = " *Please input alphanumeric characters only!";
+        userNameError = true;
     }
     
+     //Password verification
+    if (password === "") {
+        document.getElementById("passwordWarning").innerHTML = " *Please provide a password!";
+        passwordError = true;
+    } else if (password.length < 8) {
+        document.getElementById("passwordWarning").innerHTML = " *Password length must be 8 or more characters!";
+        passwordError = true;
+    }
     
-        if (checkev == 7) {
-         //Check all before opening confirmation page.
-            window.location.href = "confirm.html";
-        }
-  }
-   
+ //passwordVerify verification
+    if (passwordVerify === "") {
+        document.getElementById("passwordVerifyWarning").innerHTML = " *Please provide a password!";
+        passwordVerifyError = true;
+
+    } else if (passwordVerify !== password) {
+        document.getElementById("passwordVerifyWarning").innerHTML = " *Password must match!";
+        passwordVerifyError = true;
+    }
+    
+    //firstName verification
+    if (firstName === "") {
+        document.getElementById("firstNameWarning").innerHTML = " *Please provide a first name!";
+        firstNameError = true;
+    } else if (!firstName.match(letters)) {
+        document.getElementById("firstNameWarning").innerHTML = " *Field must be only characters!";
+        firstNameError = true;
+    }
+    
+    //lastName verification
+    if (lastName === "") {
+        document.getElementById("hostNameWarning").innerHTML = " *Please provide a last name!";
+        lastNameError = true;
+    } else if (!lastName.match(letters)) {
+        document.getElementById("hostNameWarning").innerHTML = " *Field must be only characters!";
+        lastNameError = true;
+    }
+    
+    //email verification
+    if (email === "") {
+        document.getElementById("emailWarning").innerHTML = " *Please provide an email!";
+        emailError = true;
+    } else if (emailValues.test(email) === false) {
+        document.getElementById("emailWarning").innerHTML = " *Please input a valid email!";
+        emailError = true;
+    }
+    
+    //phoneNumber verification
+    if (phoneNumber === "") {
+        document.getElementById("phoneNumberWarning").innerHTML = " *Please provide a phone number!";
+        phoneNumberError = true;
+    } else if (phoneValues.test(phoneNumber) === false) {
+        document.getElementById("phoneNumberWarning").innerHTML = " *Please input a valid phone number!";
+        phoneNumberError = true;
+    }
+    
+    //Set cursor
+    if (userNameError === true) {
+        document.getElementById('userName').focus();
+        return false;
+
+    } else if (passwordError === true) {
+        document.getElementById('password').focus();
+        return false;
+
+    } else if (passwordVerifyError === true) {
+        document.getElementById('passwordVerify').focus();
+        return false;
+
+    } else if (firstNameError === true) {
+        document.getElementById('firstName').focus();
+        return false;
+
+    } else if (lastNameError === true) {
+        document.getElementById('lastName').focus();
+        return false;
+
+    } else if (emailError === true) {
+        document.getElementById('email').focus();
+        return false;
+
+    } else if (phoneNumberError === true) {
+        document.getElementById('phoneNumber').focus();
+        return false;
+
+    }
+    
+}
+ function GetPassedInParameters() {
+    "use strict";
+
+    //Store values passed from form 1 into variables
+    var userName = getUrlParameter('userName');
+    var password = getUrlParameter('password');
+    var passwordVerify = getUrlParameter('passwordVerify');
+    var firstName = getUrlParameter('firstName');
+    var lastName = getUrlParameter('lastName');
+    var email = getUrlParameter('email');
+    var phoneNumber = getUrlParameter('phoneNumber');
+    var signUpNewsletter = getUrlParameter('signUpNewsletter');
+
+    
+    //Create cookies
+    document.cookie = "userName=" + userName + ";";
+    document.cookie = "password=" + password + ";";
+    document.cookie = "passwordVerify=" + passwordVerify + ";";
+    document.cookie = "firstName=" + firstName + ";";
+    document.cookie = "lastName=" + lastName + ";";
+    document.cookie = "email=" + email + ";";
+    document.cookie = "phoneNumber=" + phoneNumber + ";";
+    document.cookie = "signUpNewsletter=" + signUpNewsletter + ";";
+
+    GetPassedInParametersFromCookie();
+    
+    
+}
+
+//FUnction to parse data from urls
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+
+     
+function GetPassedInParametersFromCookie() {
+    
+    //Get cookie data
+    var x = document.cookie;
+
+    //Display cookie data
+    document.getElementById('node-id').innerHTML = x;
+    
+}   
