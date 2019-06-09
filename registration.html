@@ -4,6 +4,7 @@
 <head>
     <title>Invitation Page</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript" src="js/registration.js"></script>
 </head>
 
 <body>
@@ -28,41 +29,55 @@
         </nav>
     </header>
     <section id="pageForm">
-        <form action="#">
-            <label for="userName">Username:</label>
-            <input type="text" name="userName" placeholder="Enter your Username" />
-
-            <label for="Password">Password:
-            </label>
-            <input type="password" name="password" placeholder="Enter your Password" />
-
+        <form action="/registration.html" onsubmit="return checkall()" method="get"  >
+        
+            <label for="userName">Username:</label><label2 id="userNameWarning"></label2>
+            <input type="text" name="userName" placeholder="Enter your Username" id="userName"/>
+            
+            
+            <label for="Password">Password:</label> <label2 id="passwordWarning"></label2>
+            <input type="password" name="password" placeholder="Enter your Password" id="password" />
+             
+            
             <label for="passwordVerify">Verify your Password:
-            </label>
-            <input type="password" name="passwordVerify" placeholder="Enter in your Password again" />
-
+            </label> <label2 id="passwordVerifyWarning"></label2>
+            <input type="password" name="passwordVerify" id ="passwordVerify" placeholder="Enter in your Password again" />
+            
+            
             <label for="firstName">First Name:
-            </label>
-            <input type="text" name="firstName" placeholder="Enter your First Name" />
-
+            </label> <label2 id="firstNameWarning"></label2>
+            <input type="text" name="firstName" placeholder="Enter your First Name" id="firstName" />
+           
+            
             <label for="hostName">Last Name:
-            </label>
-            <input type="text" name="lastName" placeholder="Enter your Last Name" />
+            </label> <label2 id="hostNameWarning"></label2>
+            <input type="text" name="lastName" placeholder="Enter your Last Name" id="lastName" />
+        
+            
             <label for="email">Email:
-            </label>
-            <input type="text" name="email" placeholder="Enter your Email Address" />
+            </label><label2 id="emailWarning"></label2>
+            <input type="text" name="email" placeholder="Enter your Email Address" id="email" />           
+          
 			<label for="phoneNumber">Phone Number
-            </label>
-            <input type="text" name="lastName" placeholder="Enter your Phone Number" />
+            </label><label2 id="phoneNumberWarning"></label2>
+            <input type="text" name="phoneNumber" placeholder="Enter your Phone Number" id="phoneNumber" />
+                      
+            
 			<label for="signUpNewsletter">Sign up for newsletter:
             </label>
 			  <input type="radio" name="signUpNewsletter" value="Yes" checked> Yes 
 				<input type="radio" name="signUpNewsletter" value="No"> No
-            <input type="submit" value="Next step">
+              
+            
+            <input type="submit" onclick="return checkall()" formaction="confirm.html" value="Submit">
+            
+            
         </form>
     </section>
 
     <footer>This events site is for IT3515 tasks.
     </footer>
+  
 </body>
 
 </html>
